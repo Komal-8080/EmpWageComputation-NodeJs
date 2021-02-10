@@ -46,7 +46,6 @@ let totEmpWage = 0;
 function sum(dailyWage) {
 	totEmpWage += dailyWage;
 }
-
 empDailyWageArr.forEach(sum);
 console.log("UC7A - Total Days: " +totalWorkingDays + "Total Hours: " +totalEmpHrs + "Emp Wage: " + totEmpWage);
 
@@ -73,3 +72,9 @@ function fulltimeWage(dailyWage) {
 let fullDayWageArr = mapDayWithWageArr.filter(fulltimeWage);
 console.log("UC7c - Daily Wage Filter When Full Time Wage Earned");
 console.log(fullDayWageArr);
+
+//UC7D - Find the first occurence when full time wage was earned using find function
+function findFullTimeWage(dailyWage) {
+	return dailyWage.includes("160");
+}
+console.log("UC 7D - First time FullTime wage was earned on Day: " + mapDayWithWageArr.find(findFullTimeWage));

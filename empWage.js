@@ -4,8 +4,6 @@ const IS_FULL_TIME=2;
 const PART_TIME_HOURS=4;
 const FULL_TIME_HOURS=8;
 const WAGE_PER_HOUR=20;
-const NUM_OF_WORKING_DAYS = 20;
-const MAX_HRS_IN_MONTH = 160;
 
 function getWorkingHours(empCheck) {
        switch (empCheck) {
@@ -24,9 +22,12 @@ function calcDailyWage(empHrs) {
 	return empHrs*WAGE_PER_HOUR;
 }
 
+const NUM_OF_WORKING_DAYS = 20;
+const MAX_HRS_IN_MONTH = 160;
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWageArr = new Array();
+let empDailyWageMap = new Map();
 
 while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
 	totalWorkingDays++;
@@ -34,7 +35,9 @@ while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
 	let empHrs = getWorkingHours(empCheck);
 	totalEmpHrs += empHrs;
 	empDailyWageArr.push(calcDailyWage(empHrs));
+	empDailyWageMap.set(totalWorkingDays, calcDailyWage(empHrs));
 }
+console.log(empDailyWageMap);
 
 let empWage = calcDailyWage(totalEmpHrs);
 console.log("UC6 -Total Days: "+totalWorkingDays+" Total Hours: "+totalEmpHrs +" Emp Wage: "+empWage);
@@ -98,3 +101,7 @@ function totalDaysWorked(numOfDays, dailyWage)  {
 	return numOfDays;
 }
 console.log("UC 7G - Number of Days Employee Worked: "+ empDailyWageArr.reduce(totalDaysWorked, 0));
+
+
+//UC-8 Using map to store Day Wise Wage
+console.log("UC8 - Emp Wage Map totalHrs: " + Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
